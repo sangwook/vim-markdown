@@ -61,10 +61,11 @@ syn region markdownH6 matchgroup=markdownH6Delimiter start="#######\@!" end="#*\
 
 syn match markdownBlockquote ">\%(\s\|$\)" contained nextgroup=@markdownBlock
 
-syn region markdownCodeBlock start="    \|\t" end="$" contained
+" syn region markdownCodeBlock start="    \|\t" end="$" contained
+syn region markdownCodeBlock start="  \|\t" end="$" contained
 
 " TODO: real nesting
-syn match markdownListMarker "\%(\t\| \{0,4\}\)[-*+]\%(\s\+\S\)\@=" contained
+syn match markdownListMarker "\%(\t\| \{0,4\}\)\{0,12\}[-*+]\%(\s\+\S\)\@=" contained
 syn match markdownOrderedListMarker "\%(\t\| \{0,4}\)\<\d\+\.\%(\s\+\S\)\@=" contained
 
 syn match markdownRule "\* *\* *\*[ *]*$" contained
@@ -72,7 +73,8 @@ syn match markdownRule "- *- *-[ -]*$" contained
 
 syn match markdownLineBreak " \{2,\}$"
 
-syn region markdownIdDeclaration matchgroup=markdownLinkDelimiter start="^ \{0,3\}!\=\[" end="\]:" oneline keepend nextgroup=markdownUrl skipwhite
+" syn region markdownIdDeclaration matchgroup=markdownLinkDelimiter start="^ \{0,3\}!\=\[" end="\]:" oneline keepend nextgroup=markdownUrl skipwhite
+syn region markdownIdDeclaration matchgroup=markdownLinkDelimiter start="^[ -]*\[" end="\]:" oneline keepend nextgroup=markdownUrl skipwhite
 syn match markdownUrl "\S\+" nextgroup=markdownUrlTitle skipwhite contained
 syn region markdownUrl matchgroup=markdownUrlDelimiter start="<" end=">" oneline keepend nextgroup=markdownUrlTitle skipwhite contained
 syn region markdownUrlTitle matchgroup=markdownUrlTitleDelimiter start=+"+ end=+"+ keepend contained
